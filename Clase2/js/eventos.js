@@ -12,8 +12,8 @@ function prueba(item, callback) {
     callback();
 }
 
-prueba(1,dos);
-var but = document.querySelector('#btn');
-but.onclick = () => {
+var button = document.querySelector('#btn');
+
+button.onclick = () => {
     prueba(1, dos);
 }
