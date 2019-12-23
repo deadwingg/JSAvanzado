@@ -13,4 +13,7 @@ function prueba(item, callback) {
 }
 
 prueba(1,dos);
-
+var but = document.querySelector('#btn');
+but.onclick = () => {
+    prueba(1, dos);
+}
