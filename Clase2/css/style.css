@@ -1,0 +1,17 @@
+#outer {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+}
+#middle {
+    width: 150px;
+    height: 150px;
+    background-color: blueviolet;
+}
+#inner {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+}
+
+
