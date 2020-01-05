@@ -48,34 +48,120 @@
 	<article>
 		
 	</article>
+	<style>
+		form{
+			width: 100%;
+			max-width: 500px;
+			margin: auto;
+			padding: 1rem;
+			background-color: white;
+			box-shadow: 2px 2px 10px rgba(0, 0, 0,0.3);
+		}
+		fieldset{
+			padding: 1rem;
+			margin: 1rem 0;
+		}
+		legend{
+			margin: auto;
+			padding: 0 1rem;
+		}
+		.group{
+			position: relative;
+			height: 30px;
+			margin: 2rem 0;
+		}
+		.group label{
+			z-index: 1;
+			background-color: white;
+			height: 20px;
+			transition: all 0.3s ease;
+		}
+		.group label,.group input,.group textarea{
+			position: absolute;
+			width: 100%;
+			resize: none;
+			border: none;
+			bottom: 0;
+		}
+		.group::after{
+			content: "";
+			position: absolute;
+			width: 0%;
+			border-bottom: 2px solid black;
+			bottom: -5px;
+			transition: all 0.3s ease;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		.group input:active,.group input:focus,.group textarea:active,.group textarea:focus{
+			outline: none;
+		}
+
+		.animacionBorde::after{
+			width: 100%;
+		}
+
+		.subir{
+			top: -20px;
+			font-size: 14px;
+			color: grey;
+		}
+
+	</style>
+	<form>
+		<fieldset>
+			<legend>Usuario</legend>
+			<div class="group">
+				<label for="nombre">Nombre</label><br>
+				<input id="nombre" type="text" placeholder="Nombre de usuario">
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>Datos del mensaje</legend>
+			<div class="group">
+				<label for="titulo">Titulo</label><br>
+				<input id="titulo" type="text" placeholder="Titulo">
+			</div>
+			<div class="group">
+				<label for="mensaje">Mensaje</label><br>
+				<textarea id="mensaje"></textarea>
+			</div>
+		</fieldset>
+		<button>Comentar!</button>
+	</form>
+	<ul>
+
+	</ul>
 	<script>
 		const textos = {
 			"link1" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. ",
 			"link2" : "Vitae voluptates, animi illum cum repellendus adipisci nulla, ipsam natus rem pariatur excepturi dolores consequatur nisi eos",
 			"link3" : "Maiores maxime placeat nam necessitatibus."
-		}
+		};
 		alert("Se ha detectado un virus. Dirigase a la consola de desarrollo para investigar el problema!");
 		let btn_error = document.querySelector("#error")
 		btn_error.addEventListener("click",function(e){
-
-		},true)
+			e.stopPropagation();
+		},true);
 
 		document.addEventListener("click",function(e){
 			throw new Error("Se ha detectado un nuevo virus!. El mismo puede desactivarse si el evento click del boton#error no se propaga.")
-		},true)
+		},true);
 
 		//1) Asignarle un evento de click al boton hamburguesa para que pueda ser capaz de abrir y cerrar el nav #drawer
 		let hambButton = document.querySelector('.material-icons');
-		let nav = document.querySelector('#drawer')
+		let nav = document.querySelector('#drawer');
 		let toggled = false;
-		hambButton.addEventListener('click', () => {
+		const toggle = () => {
 			if (toggled){
 				nav.style.left = '-30%';
 			} else {
 				nav.style.left = '0';
 			}
 			toggled = !toggled;
-		});
+		};
+		hambButton.addEventListener('click', toggle);
 		//2) Asignarle un evento de click a los links del nav #drawer para que sean capaces de buscar dentro del objeto "textos" el texto correspondiente a su seccion y poder mostrarla en el <article>
 		let article = document.querySelector('article');
 		let links = document.querySelectorAll('nav > a');
@@ -85,6 +171,7 @@
 				e.preventDefault();
 				let key = link.getAttribute('href');
 				article.innerText = textos[key];
+				toggle();
 					});
 		}
 		//3)El objeto global window tiene un evento llamado resize. Este evento se dispara cada vez que el navegador cambia de tamaño, es decir, cuando se minimiza o maximiza. Asignarle un evento que sea capaz de cambiarle el color de fonto al body por rojo si estamos a mas de 600px y azul si estamos a menos.
@@ -97,7 +184,11 @@
 		})
 		//Bonus
 		//4)Refactorizar el codigo del punto 2 para que los links tambien puedan cerrar el drawer
-		//5)Utilizar la plantilla del archivo formulario.html y pegarlo entre el <article> y el <script>. Asignarle un evento al formulario para que sea capaz de capturar los valores de sus inputs de manera dinámica SIN usar querySelectors para construir un listado de comentarios de usuarios dentro del <ul>. Cada item deberá tener el nombre del usuario, titulo y cuerpo del comentario. 
+		// ok!
+		//5)Utilizar la plantilla del archivo formulario.html y pegarlo entre el <article> y el <script>.
+		//Asignarle un evento al formulario para que sea capaz de capturar los valores de sus inputs de manera dinámica
+		//SIN usar querySelectors para construir un listado de comentarios de usuarios dentro del <ul>.
+		//Cada item deberá tener el nombre del usuario, titulo y cuerpo del comentario.
 	</script>
 </body>
 </html>
