@@ -113,18 +113,24 @@
 		<fieldset>
 			<legend>Usuario</legend>
 			<div class="group">
+<!--
 				<label for="nombre">Nombre</label><br>
+-->
 				<input id="nombre" type="text" placeholder="Nombre de usuario">
 			</div>
 		</fieldset>
 		<fieldset>
 			<legend>Datos del mensaje</legend>
 			<div class="group">
+<!--
 				<label for="titulo">Titulo</label><br>
+-->
 				<input id="titulo" type="text" placeholder="Titulo">
 			</div>
 			<div class="group">
+<!--
 				<label for="mensaje">Mensaje</label><br>
+-->
 				<textarea id="mensaje"></textarea>
 			</div>
 		</fieldset>
@@ -189,6 +195,16 @@
 		//Asignarle un evento al formulario para que sea capaz de capturar los valores de sus inputs de manera dinámica
 		//SIN usar querySelectors para construir un listado de comentarios de usuarios dentro del <ul>.
 		//Cada item deberá tener el nombre del usuario, titulo y cuerpo del comentario.
+		let form = document.getElementsByTagName('form')[0];
+		form.addEventListener('submit', (e)=> {
+			e.preventDefault();
+			let name = document.getElementById('nombre').value;
+			let title = document.getElementById('titulo').value;
+			let comment =document.getElementById('mensaje').value;
+			let newLI = document.createElement('li');
+			newLI.innerText = `${title} by ${name}: \n ${comment}`;
+			document.getElementsByTagName('ul')[0].appendChild(newLI)
+		})
 	</script>
 </body>
 </html>
