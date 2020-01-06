@@ -28,12 +28,14 @@ form.addEventListener('submit', (e)=> {
     let longitud = dato.length;
 
     //regexp
-    let miRegExp = /^[0-9]+[a-z]+$/;
+    let miRegExp = /^[A-Z][a-z]+ [A-Z][a-z]+$/;
     if (miRegExp.test(dato)){
         console.log('submit', dato);
     } else {
         console.log('Error en la entrada');
     }
+
+
     /*if(longitud > 3){
         let datoTrim = dato.trim();
         if(datoTrim.indexOf(' ') <= 0){

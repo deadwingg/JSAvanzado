@@ -1,10 +1,10 @@
 /*
 podemos usar regex de manera literal
  */
-let literalRegExp = /123/;
+let literalRegExp = /^[a-zA-z0-9-\_\.]+@(\w+\.)+[a-z]{2,3}$/;
 
 //O con un constructor
-let constructorRegExp = new ;
+let constructorRegExp = new RegExp('^[a-zA-z0-9-\\_\\.]+@(\\w+\\.)+[a-z]{2,3}$');
 
 
 /*
