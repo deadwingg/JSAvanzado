@@ -74,8 +74,27 @@
         }
         //7)Crear un <div> de 200px de ancho por 200px de alto con el color de fondo a eleccion. El elemento tiene que poder ir y venir a lo largo de todo el ancho de la pantalla de manera continua.
         let superDiv = document.createElement('div');
+        body.appendChild(superDiv);
         superDiv.style.width = '200px';
         superDiv.style.height = '200px';
+        superDiv.style.position = 'relative';
+        superDiv.style.backgroundColor = '#000000';
+        superDiv.style.left = '0';
+        let left = 0;
+        let radius = ((left+100)/(window.innerWidth))*100;
+        setInterval(() => {
+            if(left <= window.innerWidth - 200){
+                left += 5;
+                superDiv.style.left = left.toString()+'px';
+            }
+            if(left+100 < window.innerWidth/2){
+                radius = ((left+100)/(window.innerWidth-100))*100;
+                superDiv.style.borderRadius = radius.toString()+'%';
+            } else {
+                radius = 100 - (((left+100)/(window.innerWidth-100))*100);
+                superDiv.style.borderRadius = radius.toString()+'%';
+            }
+        }, 50);
 
 
         //8)Al <div> del punto anterior transformarlo en circulo cada vez que se aproxime al centro de la pantalla y que vuelva a cuadrado cuando se aproxime a los extremos. 
