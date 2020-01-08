@@ -42,6 +42,9 @@ cargarVista('navbar', nav, () => {
 });
 
 
-window.addEventListener('hashchange', ()=> {
-    console.log('cambio la url');
+window.addEventListener('hashchange', (e)=> {
+    //saco el hash para obtener solo la parte que necesito
+    let archivo = location.hash.split('#')[1];
+    // realizo la carga de la vista
+    cargarVista(archivo, main);
 });
