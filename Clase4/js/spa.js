@@ -2,12 +2,12 @@
 function ajax(url, metodo) {
     let http_metodo = metodo || 'get'; //Si metodo es undefined uso el de la derecha (ECMA6)
     let xhr = new XMLHttpRequest();
-    xhr.open(http_metodo, url);
+    xhr.open(http_metodo, url + `?${Date.now()}`); //forma de forzar el NO cacheo automatico del navegador
     xhr.send();
     return xhr;
 }
 
-let main = document.querySelector('#main');
+let main = document.querySelector('main');
 console.log(main);
 let links = document.querySelectorAll('a');
 
