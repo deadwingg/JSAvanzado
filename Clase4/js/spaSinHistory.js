@@ -34,14 +34,10 @@ cargarVista('navbar', nav, () => {
         link.addEventListener('click', e => {
             e.preventDefault();
             let id = link.id;
-            // agrego el hash a la ruta, y luego cargo la vista en el evento hashchanged
-            location.hash = id;
-            // cargarVista(id, main);
+            // console.log(id);
+            cargarVista(id, main);
         })
     });
 });
 
 
-window.addEventListener('hashchange', ()=> {
-    console.log('cambio la url');
-});
