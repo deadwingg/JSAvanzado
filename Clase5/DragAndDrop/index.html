@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drag And Drop</title>
+
+    <style>
+        #drop {
+            width: 300px;
+            height: 300px;
+            border: 2px dashed red;
+            text-align: center;
+            line-height: 300px;
+        }
+        input {
+            display: none;
+        }
+
+        label {
+            height: 100%;
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+
+    <input id="texto" type="file">
+    <div id="drop">
+        <label for="texto">Drag And Drop ó haga click aquí</label>
+    </div>
+
+    <br>
+    <progress value="0" max="100"></progress> 
+    <span></span>
+    <br><br>
+    <img src="" alt="">
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>
