@@ -155,6 +155,9 @@ getComentarioPromise(1, true)
         console.log(error);
     });*/
 
+/*
+ASYNC-AWAIT(ECMAScript 7)
+
 function getComentarioPromise(num, debug) {
     //a la promesa en su constructor le pasamos un callback
     // tiene 2 parametros que son 2 callbacks
@@ -193,7 +196,7 @@ const retardo1 = ms => new Promise((resolve, reject) => setTimeout(resolve, ms, 
 const retardo2 = ms => new Promise((resolve, reject) => setTimeout(resolve, ms, 'fin retardo2'));
 const retardo3 = ms => new Promise((resolve, reject) => setTimeout(resolve, ms, 'fin retardo3'));
 
-/*
+
 //Ajax anidado utilizando async await
 async function getComentarios() {
     //con console.log interno
@@ -241,9 +244,62 @@ async function getComentarios() {
 }
 
 getComentarios();
-*/
+
 
 //Ejemplo de race
 
 Promise.race([retardo1(8000), retardo2(5000), retardo3(4000)]).then(console.log);
 Promise.all([retardo1(8000), retardo2(5000), retardo3(4000)]).then(console.log);
+*/
+
+//Ajax con fetch() (ECMAScript 6)
+/*
+//fetch retorna una promise(!)
+fetch(url)
+    .then(respuesta => {
+        return respuesta.json()
+    })
+    .then(json => console.log(json));
+*/
+
+function getComentarioFetch(id,debug) {
+    return fetch(url+`${id}`)
+        .then(respuesta => {
+            return respuesta.json()
+        })
+        .then(json => {
+            if(debug) console.log(json);
+            return Promise.resolve(json) //llamo al metodo  para retornar una promesa
+        });
+}
+
+//vanilla promise
+// getComentarioFetch(1,true)
+//     .then(() => getComentarioFetch(2,true))
+//     .then(() => getComentarioFetch(3,true))
+//     .then(() => getComentarioFetch(4,true))
+//     .then(() => getComentarioFetch(5,true))
+//     .then(() => getComentarioFetch(6,true))
+//     .then(() => getComentarioFetch(7,true))
+//     .then(() => getComentarioFetch(8,true))
+//     .then(() => getComentarioFetch(9,true))
+//     .then(() => getComentarioFetch(10,true));
+
+//async-await
+async function getComentariosFetch() {
+    try {
+        await getComentarioFetch(1, true);
+        await getComentarioFetch(2, true);
+        await getComentarioFetch(3, true);
+        await getComentarioFetch(4, true);
+        await getComentarioFetch(5, true);
+        await getComentarioFetch(6, true);
+        await getComentarioFetch(7, true);
+        await getComentarioFetch(8, true);
+        await getComentarioFetch(9, true);
+        await getComentarioFetch(10, true);
+    } catch (e) {
+        console.log(e);
+    }
+}
+getComentariosFetch();
