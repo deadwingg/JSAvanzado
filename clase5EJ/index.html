@@ -26,10 +26,10 @@
     </footer>
     <script>
         //Seleccion de elementos globales
-        let menu = document.querySelector(".material-icons")
-		let drawer = document.querySelector("#drawer")
-        let links = document.querySelectorAll("a")
-        let loader = document.querySelector("img")
+        let menu = document.querySelector(".material-icons");
+		let drawer = document.querySelector("#drawer");
+        let links = document.querySelectorAll("a");
+        let loader = document.querySelector("img");
         
         if (loader.complete) {
             ajax("home.html","get",function(data){
@@ -48,28 +48,23 @@
 			}else{
 				drawer.style.left = '0px'
 			}
-		})
+		});
         //Pedidos de ajax
         links.forEach(function(link){
             link.addEventListener("click",function(e){
                 e.preventDefault();
-                drawer.style.left = ''
+                drawer.style.left = '';
                 ajax(e.target.href,"get",function(data){
                     render("main",data);
-                    //exercise1
-                    let relUrl = link.getAttribute('href').split('.')[0];
-                    console.log(relUrl);
-                    history.pushState(null,'',relUrl);
-                })
+                    portfolioLoad();
+                }, true)
             })
         });
         //exercise2
         window.addEventListener('popstate', e => {
-           let relUrl = window.location.pathname.split('/').slice(-1)[0].split('.')[0];
-           let archivo = relUrl + '.html';
-           ajax(archivo, 'get', data => {
-               render('main', data);
-           })
+           if (e.state){
+               render('main', e.state.template);
+           }
         });
         //Funciones Utilitarias
         /*
@@ -77,14 +72,18 @@
         *@param metodo    String   : El metodo HTTP del pedido
         *@param callback  Function : La funcion a ejecutar en el evento load 
         */
-        function ajax(url,metodo,callback){
-            let xhr = new XMLHttpRequest
-            xhr.open(metodo,url)
+        function ajax(url,metodo,callback, guardarHistorial){
+            let xhr = new XMLHttpRequest();
+            xhr.open(metodo,url);
             xhr.addEventListener("load",function(){
-                if(xhr.status==200){
-                    callback(xhr.response)
+                if(xhr.status===200){
+                    if(guardarHistorial){
+                        window.history.pushState({template: xhr.response},
+                            '', url.split('.')[0])
+                    }
+                    callback(xhr.response);
                 }
-            })
+            });
             xhr.send()
         }
         /*
@@ -95,6 +94,34 @@
             document.querySelector(selector).innerHTML = data
         }
 
+        function portfolioLoad() {
+            if(window.location.href.includes('portfolio')){
+                let articles = document.querySelectorAll('article');
+                articles.forEach(article => {
+                    ajax('https://dog.ceo/api/breeds/image/random', 'get', (data) => {
+                        let parseada = JSON.parse(data);
+                        let img = document.createElement('img');
+                        img.src = parseada.message;
+                        article.children[0].appendChild(img);
+                    })
+                    article.addEventListener('click', e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log(e.target);
+                        if(e.target.id == 'listado'){
+                            ajax('listado.html', 'get', data => {
+                                render('main', data);
+                            }, true)
+                        }
+                        if(e.target.id == 'traduccion'){
+                            ajax('traduccion.html', 'get', data => {
+                                render('main', data);
+                            }, true)
+                        }
+                    },true)
+                })
+            }
+        }
         //Continuando con la pagina dinamica que habiamos construido en la clase anterior vamos a intentar controlar el historial del cliente para poder simular una navegacion completa
         //1) Modificar el callback de los clicks de cada link para que ademas se cree un nuevo punto en el historial del usuario usando el texto de cada link como nueva url ok
         //2)Asignarle a window un evento de popstate para que dentro de su callback podamos volver a solicitar el contenido de la url reflejada. Podemos usar el string ubicado en window.location.pathname que nos da nuestra URL generada en el paso anterior
