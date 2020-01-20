@@ -67,8 +67,8 @@ var persona = (() => {
     return {
         getEdad: () => this.edad
     }
-})()
-console.log(persona.getEdad())
+})();
+console.log(persona.getEdad());
 
 // with numbers booleans an strings  we got valuecopy
 var a1  = 1;

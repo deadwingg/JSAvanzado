@@ -14,7 +14,7 @@ xhr.addEventListener('load', () => {
     }
 });
 xhr.addEventListener('error', () => {
-    console.log('ERROR AJAX!!!');
+    console.log('ERROR 1 - AJAX!!!');
 
     let script = document.createElement('script');
     script.src = `${url}&callback=micallback`;
