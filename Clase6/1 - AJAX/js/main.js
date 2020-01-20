@@ -64,7 +64,7 @@ function getCommentario3() {
     })
 }*/
 
-/* AJAX anidado utilizando callbacks (ECMAScript 5)
+/* 1 - AJAX anidado utilizando callbacks (ECMAScript 5)
 function getComentarioCallback(num, debug, cb) {
     let xhr = new XMLHttpRequest();
     xhr.open('get', url+num);
@@ -101,7 +101,7 @@ getComentarioCallback(1,true, () => {
 */
 
 /*
-AJAX con promise (ECMAScript 6)
+1 - AJAX con promise (ECMAScript 6)
 function getComentarioPromise(num, debug) {
     //a la promesa en su constructor le pasamos un callback
     // tiene 2 parametros que son 2 callbacks
@@ -117,7 +117,7 @@ function getComentarioPromise(num, debug) {
                 resolve(respuesta); //se llama asi, tanto resolve como reject solo reciben un parametro, si necesito mas puedo usar un objeto
             } else {
                 let error = {
-                    title: 'error de status AJAX',
+                    title: 'error de status 1 - AJAX',
                     body: xhr.status,
                 };
                 reject(error);
@@ -125,7 +125,7 @@ function getComentarioPromise(num, debug) {
         });
         xhr.addEventListener('error', (e)=>{
             let error = {
-                title: 'error general AJAX',
+                title: 'error general 1 - AJAX',
                 body: e,
             };
             reject(error);
@@ -173,7 +173,7 @@ function getComentarioPromise(num, debug) {
                 resolve(respuesta); //se llama asi, tanto resolve como reject solo reciben un parametro, si necesito mas puedo usar un objeto
             } else {
                 let error = {
-                    title: 'error de status AJAX',
+                    title: 'error de status 1 - AJAX',
                     body: xhr.status,
                 };
                 reject(error);
@@ -181,7 +181,7 @@ function getComentarioPromise(num, debug) {
         });
         xhr.addEventListener('error', (e)=>{
             let error = {
-                title: 'error general AJAX',
+                title: 'error general 1 - AJAX',
                 body: e,
             };
             reject(error);

@@ -1,4 +1,4 @@
-console.log('Objetos en JS');
+console.log('1 - 2 - Objetos en JS');
 
 //hay 4 maneras de crear un objeto
 //---------------------------------------------------------------------------------------------
