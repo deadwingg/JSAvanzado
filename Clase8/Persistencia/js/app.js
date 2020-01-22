@@ -40,4 +40,8 @@ for (let i = 0; i < sessionStorage.length; i++) {
 //Persistencia en cookies
 //no tienen api, funcionan en todos los navegadores
 
-document.cookie = 'claveSession=12345;max-age=20'; // con ; podemos usar atributos max-age=TIME_IN_SECONDS
+// document.cookie = 'claveSession=12345;max-age=20'; // con ; podemos usar atributos max-age=TIME_IN_SECONDS
+//cada f5 nos da un almacenamiento diferente
+//el evento cambio d ealmacenamiento se dispara cuando varia el localstorage
+
+localStorage.setItem('fyh', new Date());
